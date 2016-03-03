@@ -1,7 +1,7 @@
 % http://eidors3d.sourceforge.net/tutorial/EIDORS_basics/forward_solvers.shtml
 
 % 2D model (originally d2d1c)
-imdl = mk_common_model('h2d1c', 19);
+imdl = mk_common_model('i2d2c', 19);
 
 % create an homogeneous image
 figure();
