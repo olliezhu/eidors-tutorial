@@ -22,4 +22,4 @@ make
 make install
 ```
 
-Run matlab with `NETGENDIR=/opt/netgen/bin PATH=/opt/netgen/bin:$PATH matlab &`
+Run matlab with `NETGENDIR=/opt/netgen/bin PATH=/opt/netgen/bin:$PATH matlab &` or just `eidors.sh &`
