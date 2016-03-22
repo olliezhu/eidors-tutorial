@@ -11,7 +11,7 @@ axis square;
 subplot(122);
 
 % 3D model
-imdl_3d = mk_common_model('n3r2', [16, 2]);
+imdl_3d = mk_common_model('n3r2', [16, 2]); % 'd3cr'
 show_fem(imdl_3d.fwd_model);
 
 axis square;
@@ -39,7 +39,6 @@ inh_data = fwd_solve(sim_img);
 
 subplot(511);
 xax = 1:length(homg_data.meas);
-
 hh_homg = plot(xax, homg_data.meas);
 subplot(512);
 hh_inhomg = plot(xax, inh_data.meas);
@@ -50,16 +49,26 @@ hh_diff = plot(xax, homg_data.meas - inh_data.meas);
 subplot(515);
 hh = plotyy(xax, [homg_data.meas, inh_data.meas], ...
             xax, homg_data.meas - inh_data.meas);
-set(hh, 'xlim', [1, max(xax)]);
+%set(hh, 'xlim', [1, max(xax)]);
 %print_convert('tutorial010b.png', '-density 75');
+
+figure();
+subplot(311);
+h1 = plot(xax, inh_data.meas);
+
+% add 20dB SNR noise to data
+subplot(312);
+noise_level = std(inh_data.meas - homg_data.meas) / 10^(20/20);
+noise = noise_level * randn(size(inh_data.meas));
+h2 = plot(xax, noise);
+
+subplot(313);
+inh_data.meas = inh_data.meas + noise;
+h3 = plot(xax, inh_data.meas);
 
 figure();
 subplot(131);
 show_fem(sim_img);
-
-% add 20dB SNR noise to data
-noise_level = std(inh_data.meas - homg_data.meas) / 10^(20/20);
-inh_data.meas = inh_data.meas + noise_level * randn(size(inh_data.meas));
 
 % reconstruct
 rec_img = inv_solve(imdl_3d, homg_data, inh_data);
