@@ -22,4 +22,6 @@ make
 make install
 ```
 
+To automatically load the EIDORS library when MATLAB launches, run the EIDORS startup script from `$matlabroot/toolbox/local/startup.m`.
+
 Run matlab with `NETGENDIR=/opt/netgen/bin PATH=/opt/netgen/bin:$PATH matlab &` or just `eidors.sh &`
